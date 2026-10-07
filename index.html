@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Makes the page scale properly on phones and tablets -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Expense Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <span class="logo">💰</span>
+      <h1>Personal Expense Calculator</h1>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- Success / info message (shown briefly by JavaScript) -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- ===== Dashboard ===== -->
+    <section class="dashboard" aria-label="Dashboard">
+      <div class="stat stat-income">
+        <span class="stat-icon">💵</span>
+        <div>
+          <span class="stat-label">Total Income</span>
+          <span class="stat-value" id="totalIncome">₹0.00</span>
+        </div>
+      </div>
+      <div class="stat stat-expense">
+        <span class="stat-icon">🧾</span>
+        <div>
+          <span class="stat-label">Total Expenses</span>
+          <span class="stat-value" id="totalExpenses">₹0.00</span>
+        </div>
+      </div>
+      <div class="stat stat-savings" id="savingsStat">
+        <span class="stat-icon" id="savingsIcon">🏦</span>
+        <div>
+          <span class="stat-label">Total Savings</span>
+          <span class="stat-value" id="totalSavings">₹0.00</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Savings / Overspending banner -->
+    <div id="statusBanner" class="banner hidden"></div>
+
+    <div class="layout">
+
+      <!-- ===== Left column: forms ===== -->
+      <div class="column">
+
+        <!-- Income section -->
+        <section class="panel">
+          <h2>📥 Monthly Income</h2>
+          <form id="incomeForm" novalidate>
+            <label for="incomeInput">Income amount (₹)</label>
+            <input type="number" id="incomeInput" placeholder="e.g. 25000" min="0" step="0.01">
+            <p class="error" id="incomeError"></p>
+            <button type="submit" class="btn btn-primary">Save Income</button>
+          </form>
+        </section>
+
+        <!-- Add Expense section -->
+        <section class="panel">
+          <h2>➕ Add Expense</h2>
+          <form id="expenseForm" novalidate>
+            <label for="expenseName">Expense Name</label>
+            <input type="text" id="expenseName" placeholder="e.g. Lunch at canteen" maxlength="40">
+            <p class="error" id="nameError"></p>
+
+            <label for="expenseAmount">Amount (₹)</label>
+            <input type="number" id="expenseAmount" placeholder="e.g. 150" min="0" step="0.01">
+            <p class="error" id="amountError"></p>
+
+            <label for="expenseCategory">Category</label>
+            <select id="expenseCategory">
+              <option value="">-- Select category --</option>
+              <option value="Food">🍔 Food</option>
+              <option value="Transport">🚌 Transport</option>
+              <option value="Education">📚 Education</option>
+              <option value="Shopping">🛍️ Shopping</option>
+              <option value="Bills">💡 Bills</option>
+              <option value="Entertainment">🎬 Entertainment</option>
+              <option value="Healthcare">🏥 Healthcare</option>
+              <option value="Other">📦 Other</option>
+            </select>
+            <p class="error" id="categoryError"></p>
+
+            <label for="expenseDate">Date</label>
+            <input type="date" id="expenseDate">
+            <p class="error" id="dateError"></p>
+
+            <button type="submit" class="btn btn-primary">Add Expense</button>
+          </form>
+        </section>
+      </div>
+
+      <!-- ===== Right column: results ===== -->
+      <div class="column">
+
+        <!-- Expense table -->
+        <section class="panel">
+          <h2>📋 Expense List</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th class="num">Amount</th>
+                  <th>Date</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <!-- Rows are created by JavaScript -->
+              <tbody id="expenseBody"></tbody>
+            </table>
+          </div>
+          <p class="empty" id="emptyMessage">No expenses yet. Add your first one using the form.</p>
+        </section>
+
+        <!-- Category summary -->
+        <section class="panel">
+          <h2>📊 Category Summary</h2>
+          <div class="category-grid" id="categoryGrid"></div>
+          <p class="empty" id="categoryEmpty">Category totals will appear here.</p>
+        </section>
+
+        <button type="button" class="btn btn-danger" id="resetBtn">🗑️ Reset / Clear All</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">Module 2 – HTML, CSS &amp; JavaScript Fundamentals</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
